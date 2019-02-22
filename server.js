@@ -1,10 +1,10 @@
-var express = require('express');
-var multer = require('multer');
+const express = require('express');
+const multer = require('multer');
 
 
-var app = express();
-var storage = multer.diskStorage({
-    destination: function (req, file, callback) {
+let app = express();
+let storage = multer.diskStorage({
+    destination: function(req, file, callback) {
         callback(null, './uploads');
     },
     filename: function(req, file, callback) {
@@ -12,21 +12,23 @@ var storage = multer.diskStorage({
     }
 });
 
-var upload = multer({storage: storage}).single('pdf');
+let upload = multer({ storage }).single('pdf');
 
 app.get('/', function(req, res) {
-    console.log('home...')
+    console.log('Home...')
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post('/up/pdf', function(req, res) {
-    console.log('uploading...')
-    upload(req,res,function(err) {
-        if(err) {
-            res.end('failed');
+    console.log('Uploading...')
+    upload(req, res, function(err) {
+        if (err) {
+            console.log('Failed');
+            res.end('Failed!');
         }
         console.log('Uploaded');
-        res.redirect('/')
+        res.end('Success!');
+        //res.redirect('/')
     });
 });
 
