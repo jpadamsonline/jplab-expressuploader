@@ -15,12 +15,12 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage}).single('pdf');
 
 app.get('/', function(req, res) {
-    console.log('here first')
+    console.log('home...')
     res.sendFile(__dirname + "/index.html");
 });
 
 app.post('/up/pdf', function(req, res) {
-    console.log('here second')
+    console.log('uploading...')
     upload(req,res,function(err) {
         if(err) {
             res.end('failed');
@@ -32,6 +32,6 @@ app.post('/up/pdf', function(req, res) {
 
 
 app.listen(3000, function() {
-    console.log('working on: http://localhost:3000/ ');
+    console.log('Listening: http://localhost:3000/ ');
 });
 
